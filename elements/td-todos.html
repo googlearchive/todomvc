@@ -69,7 +69,7 @@
         this.$.model.destroyItem(detail);
       },
       toggleAllCompletedAction: function(e, detail, sender) {
-        this.$.model.setFilteredCompleted(sender.checked);
+        this.$.model.setItemsCompleted(sender.checked);
       },
       clearCompletedAction: function() {
         this.$.model.clearItems();
