@@ -17,7 +17,7 @@
         this.activeCount = this.items.length - this.completedCount;
         this.allCompleted = this.completedCount && !this.activeCount;
         this.filterItems();
-        this.fire('modelchanged');
+        this.fire('td-model-changed');
       },
       filterItems: function() {
         var fn = this.filters[this.filter];

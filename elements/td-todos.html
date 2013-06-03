@@ -10,7 +10,7 @@
       @host { * { display: block; }};
     </style>
     <flatiron-director route="{{route}}"></flatiron-director>
-    <td-model id="model" filter="{{route}}" on-modelchanged="modelChangedAction"></td-model>
+    <td-model id="model" filter="{{route}}" on-td-model-changed="modelChangedAction"></td-model>
     <section id="todoapp">
       <header id="header">
         <input id="new-todo" placeholder="What needs to be done?" autofocus on-keyup="keyAction">
