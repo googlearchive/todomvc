@@ -1,0 +1,80 @@
+<link rel="import" href="../lib-elements/polymer-selector.html">
+<link rel="import" href="../lib-elements/flatiron-director.html">
+<link rel="import" href="td-item.html">
+<link rel="import" href="td-model.html">
+
+<element name="td-todos" attributes="route">
+
+  <template>
+    <style>
+      @host { * { display: block; }};
+    </style>
+    <flatiron-director route="{{route}}"></flatiron-director>
+    <td-model id="model" filter="{{route}}" on-modelchanged="modelChangedAction"></td-model>
+    <section id="todoapp">
+      <header id="header">
+        <input id="new-todo" placeholder="What needs to be done?" autofocus on-keyup="keyAction">
+      </header>
+      <section id="main" showing="{{$.model.items.length}}">
+        <input id="toggle-all" type="checkbox" on-change="toggleAllCompletedAction" checked="{{$.model.allCompleted}}">
+        <label for="toggle-all">Mark all as complete</label>
+        <ul id="todo-list" on-td-item-changed="itemChangedAction" on-td-destroy-item="destroyItemAction">
+          <template repeat="{{$.model.filtered}}">
+            <li is="td-item" item="{{}}"></li>
+          </template>
+        </ul>
+      </section>
+      <footer id="footer" showing="{{$.model.items.length}}">
+        <span id="todo-count"><strong>{{$.model.activeCount}}</strong> {{activeItemLabel}} left</span>
+        <polymer-selector id="filters" selected="0">
+          <li>
+            <a name="all" href="../#/">All</a>
+          </li>
+          <li>
+            <a name="active" href="../#/active">Active</a>
+          </li>
+          <li>
+            <a name="completed" href="../#/completed">Completed</a>
+          </li>
+        </polymer-selector>
+        <button showing="{{$.model.completedCount}}" id="clear-completed" on-click="clearCompletedAction">Clear completed ({{$.model.completedCount}})</button>
+        </template>
+      </footer>
+    </section>
+  </template>
+
+  <script>
+    var ENTER_KEY = 13;
+    var ESC_KEY = 27;
+    Polymer.register(this, {
+      applyAuthorStyles: true,
+      keyAction: function(e, detail, sender) {
+        switch (e.keyCode) {
+          case ENTER_KEY:
+            this.$.model.newItem(sender.value);
+            // when polyfilling Object.observe, make sure we update immediately
+            Platform.flush();
+          case ESC_KEY: 
+            sender.value = '';
+            break;
+        }
+      },
+      modelChangedAction: function() {
+        this.activeItemLabel = this.$.model.activeCount == 1 ? 'item' : 'items';
+      },
+      itemChangedAction: function() {
+        this.$.model.itemsChanged();
+      },
+      destroyItemAction: function(e, detail) {
+        this.$.model.destroyItem(detail);
+      },
+      toggleAllCompletedAction: function(e, detail, sender) {
+        this.$.model.setFilteredCompleted(sender.checked);
+      },
+      clearCompletedAction: function() {
+        this.$.model.clearItems();
+      }
+    });
+  </script>
+
+</element>

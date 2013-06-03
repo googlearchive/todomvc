@@ -1,0 +1,31 @@
+/* base.css overrides */
+
+[showing="0"] {
+  display: none;
+}
+
+#filters li.selected a {
+	font-weight: bold;
+}
+
+#todoapp {
+  margin-top: 40px;
+}
+
+body header {
+  line-height: normal;
+}
+
+body header h1 {
+	font-size: 70px;
+	font-weight: bold;
+	text-align: center;
+	color: #b3b3b3;
+	color: rgba(255, 255, 255, 0.3);
+	text-shadow: -1px -1px rgba(0, 0, 0, 0.2);
+	-webkit-text-rendering: optimizeLegibility;
+	-moz-text-rendering: optimizeLegibility;
+	-ms-text-rendering: optimizeLegibility;
+	-o-text-rendering: optimizeLegibility;
+	text-rendering: optimizeLegibility;
+}
