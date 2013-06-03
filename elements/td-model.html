@@ -5,6 +5,7 @@
       filtered: null,
       completedCount: 0,
       activeCount: 0,
+      allCompleted: false,
       ready: function() {
         this.items = [];
       },
@@ -50,9 +51,6 @@
           item.completed = completed;
         });
         this.itemsChanged();
-      },
-      get allCompleted() {
-        return this.items.length && (this.completedCount === this.items.length);
       },
       filters: {
         active: function(item) {
