@@ -7,6 +7,10 @@
         this.router.on(/(\w*)/, function(route) {
           this.route = route;
         }.bind(this));
+        this.asyncMethod(function() {
+          var initialRoute = this.router.getRoute(0);
+          this.route = initialRoute || '';
+        });
       },
       get router() {
         if (!private_router) {
