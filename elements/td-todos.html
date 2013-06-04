@@ -4,11 +4,8 @@
 <link rel="import" href="td-model.html">
 
 <element name="td-todos" attributes="route">
-
+  <link rel="stylesheet" href="td-todos.css">
   <template>
-    <style>
-      @host { * { display: block; }};
-    </style>
     <flatiron-director route="{{route}}"></flatiron-director>
     <td-model id="model" filter="{{route}}" on-td-model-changed="modelChangedAction"></td-model>
     <section id="todoapp">
@@ -47,7 +44,6 @@
     var ENTER_KEY = 13;
     var ESC_KEY = 27;
     Polymer.register(this, {
-      applyAuthorStyles: true,
       keyAction: function(e, detail, sender) {
         switch (e.keyCode) {
           case ENTER_KEY:
