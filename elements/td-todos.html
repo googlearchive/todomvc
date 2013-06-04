@@ -1,5 +1,6 @@
 <link rel="import" href="../lib-elements/polymer-selector.html">
 <link rel="import" href="../lib-elements/flatiron-director.html">
+<link rel="import" href="../lib-elements/polymer-localstorage.html">
 <link rel="import" href="td-item.html">
 <link rel="import" href="td-model.html">
 
@@ -7,7 +8,8 @@
   <link rel="stylesheet" href="td-todos.css">
   <template>
     <flatiron-director route="{{route}}"></flatiron-director>
-    <td-model id="model" filter="{{route}}" on-td-model-changed="modelChangedAction"></td-model>
+    <polymer-localstorage id="storage" name="todos-polymer" value="{{items}}"></polymer-localstorage>
+    <td-model id="model" items="{{items}}" filter="{{route}}" on-td-model-changed="modelChangedAction"></td-model>
     <section id="todoapp">
       <header id="header">
         <input id="new-todo" placeholder="What needs to be done?" autofocus on-keyup="keyAction">
@@ -57,6 +59,7 @@
       },
       modelChangedAction: function() {
         this.activeItemLabel = this.$.model.activeCount == 1 ? 'item' : 'items';
+        this.$.storage.save();
       },
       itemChangedAction: function() {
         this.$.model.itemsChanged();

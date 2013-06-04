@@ -6,7 +6,9 @@
       activeCount: 0,
       allCompleted: false,
       ready: function() {
-        this.items = [];
+        this.asyncMethod(function() {
+          this.items = this.items || [];
+        });
       },
       filterChanged: function() {
         this.filterItems();
