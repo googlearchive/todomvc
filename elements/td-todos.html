@@ -26,15 +26,15 @@
       </section>
       <footer id="footer" showing="{{$.model.items.length}}">
         <span id="todo-count"><strong>{{$.model.activeCount}}</strong> {{activeItemLabel}} left</span>
-        <polymer-selector id="filters" selected="0">
-          <li>
-            <a name="all" href="../#/">All</a>
+        <polymer-selector id="filters" selected="{{routeName}}">
+          <li name="all">
+            <a href="../#/">All</a>
           </li>
-          <li>
-            <a name="active" href="../#/active">Active</a>
+          <li name="active">
+            <a href="../#/active">Active</a>
           </li>
-          <li>
-            <a name="completed" href="../#/completed">Completed</a>
+          <li name="completed">
+            <a href="../#/completed">Completed</a>
           </li>
         </polymer-selector>
         <button showing="{{$.model.completedCount}}" id="clear-completed" on-click="clearCompletedAction">Clear completed ({{$.model.completedCount}})</button>
@@ -73,6 +73,9 @@
       },
       clearCompletedAction: function() {
         this.$.model.clearItems();
+      },
+      routeChanged: function() {
+        this.routeName = this.route ? this.route : 'all';
       }
     });
   </script>
