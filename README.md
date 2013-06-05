@@ -16,7 +16,7 @@ Here are some links you may find helpful:
 
 Get help from Polymer devs and users:
 
-* Find us on IRC on *#polymer* at freenode.
+* Find us on IRC on __#polymer__ at freenode.
 * Join the high-traffic [polymer-dev](https://groups.google.com/forum/?fromgroups=#!forum/polymer-dev) Google group or the announcement-only [polymer-announce](https://groups.google.com/forum/?fromgroups=#!forum/polymer-announce) Google group.
 
 ## Implementation
