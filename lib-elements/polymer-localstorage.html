@@ -24,6 +24,9 @@ license that can be found in the LICENSE file.
       ready: function() {
         this.load();
       },
+      valueChanged: function() {
+        this.save();
+      },
       load: function() {
         var s = window.localStorage.getItem(this.name);
         if (s && this.isJson) {
