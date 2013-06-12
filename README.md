@@ -23,7 +23,7 @@ Get help from Polymer devs and users:
 
 The Polymer implementation of TodoMVC has a few key differences with other implementations:
 
-* Since Web Componennts allow you to create new types of DOM elements, the DOM tree is very different from other implementations.
+* Since Web Components allow you to create new types of DOM elements, the DOM tree is very different from other implementations.
 * The template, styling, and behavior are fully encapsulated in each custom element. Instead of having an overall stylesheet (`base.css` or `app.css`), each element that needs styling has its own stylesheet.
 * Non-visual elements such as the router and the model are also implemented as custom elements and appear in the DOM.
 
