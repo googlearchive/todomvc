@@ -30,3 +30,13 @@ The Polymer implementation of TodoMVC has a few key differences with other imple
 ## Compatibility
 
 Polymer and its polyfills are intended to work in the latest version of "evergreen" browsers. IE9 is not supported. Please refer to [Browser Compatibility](http://www.polymer-project.org/compatibility.html) for more details.
+
+## Running this sample
+
+1. Install [node.js](nodejs.org) (required for `bower` client-side package management)
+1. Install bower
+
+    npm install -g bower
+
+1. From the `todomvc\` folder, run `bower update`
+1. Start a web server in the `todomvc\` folder, and browse to the root.
