@@ -36,7 +36,7 @@ Polymer and its polyfills are intended to work in the latest version of "evergre
 1. Install [node.js](nodejs.org) (required for `bower` client-side package management)
 1. Install bower
 
-    npm install -g bower
+    `npm install -g bower`
 
 1. From the `todomvc\` folder, run `bower update`
 1. Start a web server in the `todomvc\` folder, and browse to the root.
