@@ -1,10 +1,10 @@
 /* base.css overrides */
 
 @host { 
-  * { 
-    display: block;
-    position: relative;
-  }
+	* { 
+		display: block;
+		position: relative;
+	}
 }
 
 button {
@@ -36,7 +36,7 @@ input:-moz-placeholder {
 	background: #fff;
 	background: rgba(255, 255, 255, 0.9);
 	/*margin: 130px 0 40px 0;*/
-  margin: 0 0 40px 0;
+	margin: 0 0 40px 0;
 	border: 1px solid #ccc;
 	position: relative;
 	border-top-left-radius: 2px;
@@ -240,9 +240,9 @@ label[for='toggle-all'] {
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
-  #toggle-all {
-    background: none;
-  }
+	#toggle-all {
+		background: none;
+	}
 
 	#toggle-all {
 		top: -56px;

@@ -9,36 +9,36 @@ license that can be found in the LICENSE file.
  */
 -->
 <element name="polymer-localstorage" attributes="name value isJson">
-  <template>
-    <style>
-      @host {
-        * {
-          display: none !important;
-        }
-      }
-    </style>
-  </template>
-  <script>
-    Polymer.register(this, {
-      isJson: true,
-      ready: function() {
-        this.load();
-      },
-      valueChanged: function() {
-        this.save();
-      },
-      load: function() {
-        var s = window.localStorage.getItem(this.name);
-        if (s && this.isJson) {
-          this.value = JSON.parse(s);
-        } else {
-          this.value = s;
-        }
-      },
-      save: function() {
-        window.localStorage.setItem(this.name, 
-          this.isJson ? JSON.stringify(this.value) : this.value);
-      }
-    });
-  </script>
+	<template>
+		<style>
+			@host {
+				* {
+					display: none !important;
+				}
+			}
+		</style>
+	</template>
+	<script>
+		Polymer.register(this, {
+			isJson: true,
+			ready: function() {
+				this.load();
+			},
+			valueChanged: function() {
+				this.save();
+			},
+			load: function() {
+				var s = window.localStorage.getItem(this.name);
+				if (s && this.isJson) {
+					this.value = JSON.parse(s);
+				} else {
+					this.value = s;
+				}
+			},
+			save: function() {
+				window.localStorage.setItem(this.name, 
+					this.isJson ? JSON.stringify(this.value) : this.value);
+			}
+		});
+	</script>
 </element>

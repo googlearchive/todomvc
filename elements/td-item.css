@@ -1,9 +1,9 @@
 /* base.css overrides */
 @host {
-  .editing {
-    border-bottom: none;
-    padding: 0;
-  }
+	.editing {
+		border-bottom: none;
+		padding: 0;
+	}
 }
 
 button {
@@ -11,7 +11,7 @@ button {
 	padding: 0;
 	border: 0;
 	background-color: transparent;
-  background-image: none;
+	background-image: none;
 	font-size: 100%;
 	vertical-align: baseline;
 	font-family: inherit;
