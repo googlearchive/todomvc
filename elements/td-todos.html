@@ -24,7 +24,7 @@
 				</ul>
 			</section>
 			<footer id="footer" hidden?="{{$.model.items.length == 0}}">
-			<span id="todo-count"><strong>{{$.model.activeCount}}</strong> {{$.model.activeCount == 1 ? 'item' : 'items'}} left</span>
+				<span id="todo-count"><strong>{{$.model.activeCount}}</strong> {{$.model.activeCount == 1 ? 'item' : 'items'}} left</span>
 				<polymer-selector id="filters" selected="{{route || 'all'}}">
 					<li name="all">
 						<a href="../#/">All</a>
