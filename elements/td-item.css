@@ -100,7 +100,7 @@ label {
 	transition: color 0.4s;
 }
 
-[completed] label {
+.completed label {
 	color: #a9a9a9;
 	text-decoration: line-through;
 }
@@ -139,14 +139,6 @@ label {
 
 .view:hover .destroy {
 	display: block;
-}
-
-.view[editing] {
-  display: none;
-}
-
-#edit:not([editing]) {
-  display: none;
 }
 
 /*

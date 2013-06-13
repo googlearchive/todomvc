@@ -14,7 +14,7 @@
       <header id="header">
         <input id="new-todo" placeholder="What needs to be done?" autofocus on-keyup="keyAction">
       </header>
-      <section id="main" showing="{{$.model.items.length}}">
+      <section id="main" hidden?="{{$.model.items.length == 0}}">
         <input id="toggle-all" type="checkbox" on-change="toggleAllCompletedAction" checked="{{$.model.allCompleted}}">
         <label for="toggle-all">Mark all as complete</label>
         <ul id="todo-list" on-td-item-changed="itemChangedAction" on-td-destroy-item="destroyItemAction">
@@ -23,9 +23,9 @@
           </template>
         </ul>
       </section>
-      <footer id="footer" showing="{{$.model.items.length}}">
-        <span id="todo-count"><strong>{{$.model.activeCount}}</strong> {{activeItemLabel}} left</span>
-        <polymer-selector id="filters" selected="{{routeName}}">
+      <footer id="footer" hidden?="{{$.model.items.length == 0}}">
+      <span id="todo-count"><strong>{{$.model.activeCount}}</strong> {{$.model.activeCount == 1 ? 'item' : 'items'}} left</span>
+        <polymer-selector id="filters" selected="{{route || 'all'}}">
           <li name="all">
             <a href="../#/">All</a>
           </li>
@@ -36,7 +36,7 @@
             <a href="../#/completed">Completed</a>
           </li>
         </polymer-selector>
-        <button showing="{{$.model.completedCount}}" id="clear-completed" on-click="clearCompletedAction">Clear completed ({{$.model.completedCount}})</button>
+        <button hidden?="{{$.model.completedCount == 0}}" id="clear-completed" on-click="clearCompletedAction">Clear completed ({{$.model.completedCount}})</button>
         </template>
       </footer>
     </section>
@@ -58,7 +58,6 @@
         }
       },
       modelChangedAction: function() {
-        this.activeItemLabel = this.$.model.activeCount == 1 ? 'item' : 'items';
         this.$.storage.save();
       },
       itemChangedAction: function() {
@@ -72,9 +71,6 @@
       },
       clearCompletedAction: function() {
         this.$.model.clearItems();
-      },
-      routeChanged: function() {
-        this.routeName = this.route ? this.route : 'all';
       }
     });
   </script>
