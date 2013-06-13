@@ -29,7 +29,7 @@ The Polymer implementation of TodoMVC has a few key differences with other imple
 
 ## Compatibility
 
-Polymer and its polyfills are intended to work in the latest version of "evergreen" browsers. IE9 is not supported. Please refer to [Browser Compatibility](http://www.polymer-project.org/compatibility.html) for more details.
+Polymer and its polyfills are intended to work in the latest version of _evergreen_ browsers. IE9 is not supported. Please refer to [Browser Compatibility](http://www.polymer-project.org/compatibility.html) for more details.
 
 ## Running this sample
 
