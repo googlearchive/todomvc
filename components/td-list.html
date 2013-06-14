@@ -1,0 +1,54 @@
+<element name="td-list" attributes="items">
+  <template>
+    <ul id="todo-list">
+      <template repeat="{{items}}">
+          <li completed="{{completed}}" on-dblclick="editingAction">
+            <div class="view">
+              <input type="checkbox" class="toggle" checked="{{completed}}" on-click="completedAction">
+              <label>{{title}}</label>
+              <button class="destroy" on-click="destroyAction"></button>
+            </div>
+            <input class="edit" on-change="inputEnter" on-domfocusout="inputEnter" value="{{title}}"></input>
+          </li>
+      </template>
+    </ul>
+  </template>
+  <script>
+    Polymer.register(this, {
+      editingItem: null,
+      applyAuthorStyles: true,
+      itemsChanged: function() {
+        //console.log("td-list.itemsChanged", this.items);
+      },
+      completedAction: function() {
+        // if completed property on an item was modified via the UI
+        // then we notify ancestors
+        // solves the problem of not being able to watch sub-objects
+        // automatically via Object.observe
+        this.send('itemchanged');
+      },
+      destroyAction: function(inEvent, inDetail, inSender) {
+        this.send('destroyitem', inSender.templateInstance.model);
+      },
+      editingAction: function(inEvent, inDetail, inSender) {
+        this.editingItem = inSender;
+      },
+      inputEnter: function(inEvent) {
+        this.editingItem = null;
+      },
+      editingItemChanged: function(inOld) {
+        if (inOld) {
+          inOld.removeAttribute('editing');
+          var m = inOld.templateInstance.model;
+          if (m.title == '') {
+            this.send('destroyitem', m);
+          }
+        }
+        if (this.editingItem) {
+          this.editingItem.setAttribute('editing', true);
+          this.editingItem.querySelector('.edit').focus(true);
+        }
+      }
+    });
+  </script>
+</element>

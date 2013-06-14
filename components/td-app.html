@@ -1,0 +1,36 @@
+<link rel="import" href="../lib/components/g-director.html">
+<link rel="import" href="td-todos.html">
+<element name="td-app">
+  <template>
+    <!-- only one url to track per app -->
+    <g-director path="/(\w*)" route="{{route}}"></g-director>
+    <!-- make one, they're modular -->
+    <td-todos id="one" filter="{{filter}}"></td-todos>
+    <!-- make two, they're reusable -->
+    <td-todos id="two" filter="{{filter}}"></td-todos>
+  </template>
+  <script>
+    Polymer.register(this, {
+      applyAuthorStyles: true,
+      ready: function() {
+        // populate
+        this.$.one.todos.items = [
+          {id: 5, title: "roux", completed: false},
+          {id: 6, title: "rue", completed: true},
+          {id: 7, title: "slough", completed: false},
+          {id: 8, title: "slew", completed: false}
+        ];
+        this.$.two.todos.items = [
+          {id: 1, title: "wee", completed: true},
+          {id: 2, title: "see", completed: false},
+          {id: 3, title: "gee", completed: false}
+        ];
+        // trigger initial filtering
+        this.filter = 'all';
+      },
+      routeChanged: function() {
+        this.filter = this.route || 'all';
+      }
+   });
+  </script>
+</element>

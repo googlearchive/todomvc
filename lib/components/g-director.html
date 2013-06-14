@@ -1,0 +1,20 @@
+<element name="g-director" attributes="path, route">
+  <script src="director.min.js"></script>
+  <script>
+    var router = new Router();
+    window.addEventListener("WebComponentsReady", function() {
+      router.init();
+    });
+    Polymer.register(this, {
+      routeChanged: function() {
+        this.send("route", this.route);
+      },
+      pathChanged: function() {
+        var doRoute = function(inPath) {
+          this.route = inPath;
+        }.bind(this);
+        router.on(this.path, doRoute);
+      }
+    });
+  </script>
+</element>

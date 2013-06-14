@@ -1,0 +1,28 @@
+/* base.css overrides */
+
+/* in base.css this is ""#todoapp h1" */
+
+h1 {
+	font-size: 70px;
+	font-weight: bold;
+	text-align: center;
+	color: #b3b3b3;
+	color: rgba(255, 255, 255, 0.3);
+	text-shadow: -1px -1px rgba(0, 0, 0, 0.2);
+	-webkit-text-rendering: optimizeLegibility;
+	-moz-text-rendering: optimizeLegibility;
+	-ms-text-rendering: optimizeLegibility;
+	-o-text-rendering: optimizeLegibility;
+	text-rendering: optimizeLegibility;
+}
+
+/* these two are not overrides, should they be elsewhere? */
+
+[showing=false] {
+  display: none;
+}
+
+td-app {
+  display: block;
+  margin-top: -60px;
+}
