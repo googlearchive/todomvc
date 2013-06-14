@@ -1,3 +1,3 @@
-# TodoMVC: Model as Component
+# TodoMVC: Plain Model
 
-The application data model implementation is itself a component. The `app` instances the models and mediates between model and `todos`.
+Use a plain JS application data model (prototype) that is instanced by the application and then bound directly to `todos` instances.

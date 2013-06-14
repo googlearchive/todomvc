@@ -1,7 +1,8 @@
-<link rel="import" href="../../../../toolkit-ui/elements/g-selector.html">
+<link rel="import" href="../../../../polymer-elements/polymer-selector/polymer-selector.html">
 <link rel="import" href="td-list.html">
-<element name="td-todos" attributes="todos filter activeCount">
+<element name="td-todos">
   <template>
+    
     <section id="todoapp">
       <header id="header">
         <input id="new-todo" placeholder="What needs to be done?" autofocus on-keypress="keypress">
@@ -16,23 +17,24 @@
       <footer id="footer">
         <span id="todo-count"><strong>{{activeCount}}</strong> {{countText}}</span>
 
-        <g-selector id="filters" selected="{{filter}}">
+        <polymer-selector id="filters" selected="{{filter}}">
           <li name="all"><a href="../#/">All</a></li>
           <li name="active"><a href="../#/active">Active</a></li>
           <li name="completed"><a href="../#/completed">Completed</a></li>
-        </g-selector>
+        </polymer-selector>
 
         <button id="clear-completed" showing="{{hasCompleted}}" on-click="clearAction">Clear completed ({{todos.completedCount}})</button>
       </footer>
     </section>
-    
   </template>
   <script>
     Polymer.register(this, {
+      publish: {
+        todos: null,
+        filter: '',
+        activeCount: 0
+      },
       applyAuthorStyles: true,
-      todos: null,
-      filter: '',
-      activeCount: 0,
       activeCountChanged: function() {
         this.countText = ' item' + (this.activeCount == 1 ? '' : 's') + ' left';
         this.hasCompleted = Boolean(this.todos.completedCount);

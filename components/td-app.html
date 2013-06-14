@@ -1,37 +1,41 @@
 <link rel="import" href="../lib/components/g-director.html">
-<link rel="import" href="td-model.html">
 <link rel="import" href="td-todos.html">
 <element name="td-app">
   <template>
-    <g-director path="/(\w*)" on-route="route"></g-director>
-
+    <!-- only one url to track per app -->
+    <g-director path="/(\w*)" route="{{route}}"></g-director>
+    
     <!-- make one, they're modular -->
-    <td-model id="one" items="{{oneItems}}" filter="{{filter}}"></td-model>
-    <td-todos id="t_one" todos="{{$.one.data}}" filter="{{filter}}"
-              activeCount="{{$.one.data.activeCount}}"></td-todos>
-
+    <td-todos id="t_one" todos="{{one}}" activeCount="{{one.activeCount}}" filter="{{filter}}"></td-todos>
+    
     <!-- make two, they're reusable -->
-    <td-model id="two" items="{{twoItems}}" filter="{{filter}}"></td-model>
-    <td-todos id="t_two" todos="{{$.two.data}}" filter="{{filter}}"
-              activeCount="{{$.two.data.activeCount}}"></td-todos>
+    <td-todos id="t_two" todos="{{two}}" activeCount="{{two.activeCount}}" filter="{{filter}}"></td-todos>
   </template>
   <script>
     Polymer.register(this, {
       applyAuthorStyles: true,
-      oneItems: [
-        {id: 5, title: "roux", completed: false},
-        {id: 6, title: "rue", completed: true},
-        {id: 7, title: "slough", completed: false},
-        {id: 8, title: "slew", completed: false}
-      ],
-      twoItems: [
-        {id: 1, title: "wee", completed: true},
-        {id: 2, title: "see", completed: false},
-        {id: 3, title: "gee", completed: false}
-      ],
-      route: function(inEvent, inDetail) {
-        // filter matches route, except for the empty route
-        this.filter = inDetail || "all";
+      ready: function() {
+        // instance data model
+        this.one = new Todos([
+          {id: 5, title: "roux", completed: false},
+          {id: 6, title: "rue", completed: true},
+          {id: 7, title: "slough", completed: false},
+          {id: 8, title: "slew", completed: false}
+        ]);
+        // instance another data model
+        this.two = new Todos([
+          {id: 1, title: "wee", completed: true},
+          {id: 2, title: "see", completed: false},
+          {id: 3, title: "gee", completed: false}
+        ]);
+        this.filterChanged();
+      },
+      filterChanged: function() {
+        this.one.filter = this.filter;
+        this.two.filter = this.filter;
+      },
+      routeChanged: function() {
+        this.filter = this.route || 'all';
       }
    });
   </script>
