@@ -5,7 +5,7 @@
     window.addEventListener("WebComponentsReady", function() {
       router.init();
     });
-    Polymer.register(this, {
+    this.component({
       routeChanged: function() {
         this.send("route", this.route);
       },
@@ -13,6 +13,8 @@
         var doRoute = function(inPath) {
           this.route = inPath;
         }.bind(this);
+        // TODO(sjmiles): router.on throws an exception, seems like director
+        // is faulty (this pattern is directly out of their readme)
         router.on(this.path, doRoute);
       }
     });

@@ -1,55 +1,37 @@
 <link rel="import" href="../lib/components/g-director.html">
+<link rel="import" href="td-model.html">
 <link rel="import" href="td-todos.html">
 <element name="td-app">
   <template>
-    <!-- only one url to track per app -->
-    <g-director path="/(\w*)" route="{{route}}"></g-director>
+    <g-director path="/(\w*)" on-route="route"></g-director>
+
     <!-- make one, they're modular -->
-    <td-todos id="one" on-todos="todosAction" filter="{{filter}}"
-              items="{{one.filtered}}" count="{{one.items.length}}" 
-              completedCount="{{one.completedCount}}" 
-              activeCount="{{one.activeCount}}"></td-todos>
+    <td-model id="one" items="{{oneItems}}" filter="{{filter}}"></td-model>
+    <td-todos id="t_one" todos="{{$.one.data}}" filter="{{filter}}"
+              activeCount="{{$.one.data.activeCount}}"></td-todos>
 
     <!-- make two, they're reusable -->
-    <td-todos id="two" on-todos="todosAction" filter="{{filter}}"
-              items="{{two.filtered}}" count="{{two.items.length}}" 
-              completedCount="{{two.completedCount}}" 
-              activeCount="{{two.activeCount}}"></td-todos>
+    <td-model id="two" items="{{twoItems}}" filter="{{filter}}"></td-model>
+    <td-todos id="t_two" todos="{{$.two.data}}" filter="{{filter}}"
+              activeCount="{{$.two.data.activeCount}}"></td-todos>
   </template>
   <script>
     Polymer.register(this, {
       applyAuthorStyles: true,
-      ready: function() {
-        // instance data model
-        this.one = new Todos([
-          {id: 5, title: "roux", completed: false},
-          {id: 6, title: "rue", completed: true},
-          {id: 7, title: "slough", completed: false},
-          {id: 8, title: "slew", completed: false}
-        ]);
-        // instance another data model
-        this.two = new Todos([
-          {id: 1, title: "wee", completed: true},
-          {id: 2, title: "see", completed: false},
-          {id: 3, title: "gee", completed: false}
-        ]);
-        this.routeChanged();
-      },
-      // propagate filter property to models manually
-      filterChanged: function() {
-        this.one.filter = this.filter;
-        this.two.filter = this.filter;
-      },
-      // route information needs slight validation
-      routeChanged: function() {
-        this.filter = this.route || 'all';
-      },
-      // delegate action events to models
-      todosAction: function(inEvent, inDetail, inSender) {
-        // either model one or two
-        var model = this[inSender.id];
-        // invoke the named action
-        model[inDetail.what](inDetail.who);
+      oneItems: [
+        {id: 5, title: "roux", completed: false},
+        {id: 6, title: "rue", completed: true},
+        {id: 7, title: "slough", completed: false},
+        {id: 8, title: "slew", completed: false}
+      ],
+      twoItems: [
+        {id: 1, title: "wee", completed: true},
+        {id: 2, title: "see", completed: false},
+        {id: 3, title: "gee", completed: false}
+      ],
+      route: function(inEvent, inDetail) {
+        // filter matches route, except for the empty route
+        this.filter = inDetail || "all";
       }
    });
   </script>

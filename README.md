@@ -1,3 +1,3 @@
-# TodoMVC: Granular
+# TodoMVC: Model as Component
 
-Use a plain JS application data model (prototype) that is only ever known to the `app` component. `todos` exposes an interface via properties and events and `app` mediates between the model and the `todos`.
+The application data model implementation is itself a component. The `app` instances the models and mediates between model and `todos`.
