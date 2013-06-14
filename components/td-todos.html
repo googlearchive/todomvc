@@ -1,6 +1,6 @@
 <link rel="import" href="../../../../polymer-elements/polymer-selector/polymer-selector.html">
 <link rel="import" href="td-list.html">
-<element name="td-todos" attributes="todos filter">
+<element name="td-todos" attributes="items filter count activeCount completedCount">
   <template>
     <section id="todoapp">
       <header id="header">
@@ -10,11 +10,11 @@
       <section id="main" showing="{{hasItems}}">
         <input id="toggle-all" type="checkbox">
         <label for="toggle-all">Mark all as complete</label>
-        <td-list items="{{todos.filtered}}" on-destroyitem="destroyItem" on-itemchanged="itemChanged"></td-list>
+        <td-list items="{{items}}" on-destroyitem="destroyItem" on-itemchanged="itemChanged"></td-list>
       </section>
 
-      <footer id="footer">
-        <span id="todo-count"><strong>{{todos.activeCount}}</strong> {{countText}}</span>
+      <footer id="footer" showing="{{hasItems}}">
+        <span id="todo-count"><strong>{{activeCount}}</strong> {{countText}}</span>
 
         <polymer-selector id="filters" selected="{{filter}}">
           <li name="all"><a href="../#/">All</a></li>
@@ -22,43 +22,45 @@
           <li name="completed"><a href="../#/completed">Completed</a></li>
         </polymer-selector>
 
-        <button id="clear-completed" showing="{{hasCompleted}}" on-click="clearAction">Clear completed ({{todos.completedCount}})</button>
+        <button id="clear-completed" showing="{{hasCompleted}}" on-click="clearAction">Clear completed ({{completedCount}})</button>
       </footer>
     </section>
   </template>
   <script>
     Polymer.register(this, {
+      todos: null,
       filter: '',
+      activeCount: 0,
       applyAuthorStyles: true,
-      ready: function() {
-        this.todos = new Todos();
+      countChanged: function() {
+        this.hasItems = Boolean(this.count); 
       },
-      update: function() {
-        this.todos.itemsChanged();
-        this.hasItems = Boolean(this.todos.items.length);
-        this.hasCompleted = Boolean(this.todos.completedCount);
-        this.countText = ' item' + (this.todos.activeCount == 1 ? '' : 's')
-            + ' left';
+      completedCountChanged: function() {
+        this.hasCompleted = Boolean(this.completedCount);
       },
-      filterChanged: function() {
-        this.todos.filter = this.filter;
-        this.update();
+      activeCountChanged: function() {
+        this.countText = ' item' + (this.activeCount == 1 ? '' : 's') + ' left';
       },
-      itemChanged: function( ){
-        this.update();
+      // we don't know how to perform actions on the todo model,
+      // so we send action requests upstream
+      todoAction: function(inWhat, inWho) {
+        this.send('todos', {what: inWhat, who: inWho});
+      },
+      itemChanged: function() {
+        this.todoAction('itemChanged');
       },
       keypress: function(inEvent, inDetail, inSender) {
         var ENTER_KEY = 13;
         if (inEvent.charCode == ENTER_KEY) {
-          this.todos.newItem(inSender.value);
+          this.todoAction('newItem', inSender.value);
           inSender.value = '';
         }
       },
       clearAction: function() {
-        this.todos.clearItems();
+        this.todoAction('clearItems');
       },
       destroyItem: function(inEvent, inItem) {
-        this.todos.destroyItem(inItem);
+        this.todoAction('destroyItem', inItem);
       }
     });
   </script>

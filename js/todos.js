@@ -1,6 +1,6 @@
 function Todos(inItems) {
   this.items = inItems || [];
-};
+}
 
 Todos.prototype = {
   filters: {
@@ -24,6 +24,9 @@ Todos.prototype = {
   set filter(inFilter) {
     this._filter = inFilter;
     this.filterItems();
+  },
+  itemChanged: function() {
+    this.itemsChanged();
   },
   itemsChanged: function() {
     this.completedCount = this.items.filter(this.filters.completed).length;

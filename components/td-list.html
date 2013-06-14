@@ -1,6 +1,6 @@
 <element name="td-list" attributes="items">
   <template>
-    <ul id="todo-list">
+    <ul id="todo-list" on-inputEnter="inputEnter">
       <template repeat="{{items}}">
           <li completed="{{completed}}" on-dblclick="editingAction">
             <div class="view">
@@ -8,7 +8,7 @@
               <label>{{title}}</label>
               <button class="destroy" on-click="destroyAction"></button>
             </div>
-            <input class="edit" on-change="inputEnter" on-domfocusout="inputEnter" value="{{title}}"></input>
+            <input class="edit" on-change="inputEnter" value="{{title}}"></input>
           </li>
       </template>
     </ul>
@@ -18,7 +18,7 @@
       editingItem: null,
       applyAuthorStyles: true,
       itemsChanged: function() {
-        //console.log("td-list.itemsChanged", this.items);
+        console.log("td-list.itemsChanged", this.items);
       },
       completedAction: function() {
         // if completed property on an item was modified via the UI
