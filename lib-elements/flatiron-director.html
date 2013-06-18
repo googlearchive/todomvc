@@ -10,6 +10,8 @@
 				this.asyncMethod(function() {
 					var initialRoute = this.router.getRoute(0);
 					this.route = initialRoute || '';
+					// flush to here to render the initial route synchronously.
+					Platform.flush();
 				});
 			},
 			get router() {
