@@ -1,6 +1,7 @@
 <link rel="import" href="../lib-elements/polymer-selector.html">
 <link rel="import" href="../lib-elements/flatiron-director.html">
 <link rel="import" href="../lib-elements/polymer-localstorage.html">
+<link rel="import" href="td-input.html">
 <link rel="import" href="td-item.html">
 <link rel="import" href="td-model.html">
 
@@ -12,7 +13,7 @@
 		<td-model id="model" items="{{items}}" filter="{{route}}" on-td-model-changed="modelChangedAction"></td-model>
 		<section id="todoapp">
 			<header id="header">
-				<input id="new-todo" placeholder="What needs to be done?" autofocus on-keyup="keyAction">
+				<input is="td-input" id="new-todo" placeholder="What needs to be done?" autofocus on-td-input-commit="addTodoAction" on-td-input-cancel="cancelAddTodoAction">
 			</header>
 			<section id="main" hidden?="{{$.model.items.length == 0}}">
 				<input id="toggle-all" type="checkbox" on-change="toggleAllCompletedAction" checked="{{$.model.allCompleted}}">
@@ -45,16 +46,14 @@
 		var ENTER_KEY = 13;
 		var ESC_KEY = 27;
 		Polymer.register(this, {
-			keyAction: function(e, detail, sender) {
-				switch (e.keyCode) {
-					case ENTER_KEY:
-						this.$.model.newItem(sender.value);
-						// when polyfilling Object.observe, make sure we update immediately
-						Platform.flush();
-					case ESC_KEY: 
-						sender.value = '';
-						break;
-				}
+			addTodoAction: function() {
+				this.$.model.newItem(this.$['new-todo'].value);
+				// when polyfilling Object.observe, make sure we update immediately
+				Platform.flush();
+				this.$['new-todo'].value = '';
+			},
+			cancelAddTodoAction: function() {
+				this.$['new-todo'].value = '';
 			},
 			modelChangedAction: function() {
 				this.$.storage.save();
