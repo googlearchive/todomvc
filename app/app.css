@@ -185,6 +185,12 @@ hr {
 	transition-duration: 500ms;
 }
 
+
+/* IE doesn't support the hidden attribute */
+[hidden] {
+	display: none;
+}
+
 @media (min-width: 899px) {
 	/**body*/.learn-bar {
 		width: auto;
