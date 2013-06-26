@@ -5,9 +5,9 @@
 <link rel="import" href="td-item.html">
 <link rel="import" href="td-model.html">
 
-<element name="td-todos" attributes="route">
-	<link rel="stylesheet" href="td-todos.css">
+<polymer-element name="td-todos" attributes="route">
 	<template>
+		<link rel="stylesheet" href="td-todos.css">
 		<flatiron-director route="{{route}}"></flatiron-director>
 		<polymer-localstorage id="storage" name="todos-polymer" value="{{items}}"></polymer-localstorage>
 		<td-model id="model" items="{{items}}" filter="{{route}}" on-td-model-changed="modelChangedAction"></td-model>
@@ -43,34 +43,36 @@
 	</template>
 
 	<script>
-		var ENTER_KEY = 13;
-		var ESC_KEY = 27;
-		Polymer.register(this, {
-			addTodoAction: function() {
-				this.$.model.newItem(this.$['new-todo'].value);
-				// when polyfilling Object.observe, make sure we update immediately
-				Platform.flush();
-				this.$['new-todo'].value = '';
-			},
-			cancelAddTodoAction: function() {
-				this.$['new-todo'].value = '';
-			},
-			modelChangedAction: function() {
-				this.$.storage.save();
-			},
-			itemChangedAction: function() {
-				this.$.model.itemsChanged();
-			},
-			destroyItemAction: function(e, detail) {
-				this.$.model.destroyItem(detail);
-			},
-			toggleAllCompletedAction: function(e, detail, sender) {
-				this.$.model.setItemsCompleted(sender.checked);
-			},
-			clearCompletedAction: function() {
-				this.$.model.clearItems();
-			}
-		});
+		(function() {
+			var ENTER_KEY = 13;
+			var ESC_KEY = 27;
+			Polymer('td-todos', {
+				addTodoAction: function() {
+					this.$.model.newItem(this.$['new-todo'].value);
+					// when polyfilling Object.observe, make sure we update immediately
+					Platform.flush();
+					this.$['new-todo'].value = '';
+				},
+				cancelAddTodoAction: function() {
+					this.$['new-todo'].value = '';
+				},
+				modelChangedAction: function() {
+					this.$.storage.save();
+				},
+				itemChangedAction: function() {
+					this.$.model.itemsChanged();
+				},
+				destroyItemAction: function(e, detail) {
+					this.$.model.destroyItem(detail);
+				},
+				toggleAllCompletedAction: function(e, detail, sender) {
+					this.$.model.setItemsCompleted(sender.checked);
+				},
+				clearCompletedAction: function() {
+					this.$.model.clearItems();
+				}
+			});
+		})();
 	</script>
 
-</element>
+</polymer-element>
