@@ -7,20 +7,29 @@ license that can be found in the LICENSE file.
 /**
  * @module Polymer Elements
  */
+/**
+ * polymer-localstorage provides access to localStorage.
+ *
+ * Example:
+ *
+ *     <polymer-localstorage name="my-app-storage" value="{{value}}"></polymer-localstorage>
+ *
+ * @class polymer-localstorage
+ */
 -->
-<element name="polymer-localstorage" attributes="name value isJson">
+<polymer-element name="polymer-localstorage" attributes="name value useRaw">
 	<template>
 		<style>
 			@host {
 				* {
-					display: none !important;
+					display: none;
 				}
 			}
 		</style>
 	</template>
 	<script>
-		Polymer.register(this, {
-			isJson: true,
+		Polymer('polymer-localstorage', {
+			useRaw: false,
 			ready: function() {
 				this.load();
 			},
@@ -29,16 +38,16 @@ license that can be found in the LICENSE file.
 			},
 			load: function() {
 				var s = window.localStorage.getItem(this.name);
-				if (s && this.isJson) {
+				if (s && !this.useRaw) {
 					this.value = JSON.parse(s);
 				} else {
 					this.value = s;
 				}
 			},
 			save: function() {
-				window.localStorage.setItem(this.name, 
-					this.isJson ? JSON.stringify(this.value) : this.value);
+				window.localStorage.setItem(this.name,
+					this.useRaw ? this.value : JSON.stringify(this.value));
 			}
 		});
 	</script>
-</element>
+</polymer-element>
