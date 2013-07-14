@@ -9,14 +9,19 @@
     <script src="components/polymer/polymer.min.js"></script>
 	</head>
 	<body>
+
 		<header>
 			<h1>todos</h1>
 		</header>
-		<td-todos></td-todos>
+
+		<polymer-localstorage id="storage" name="todos-polymer"></polymer-localstorage>
+		<td-todos storageId="storage"></td-todos>
+
 		<footer id="info">
 			<p>Double-click to edit a todo</p>
 			<p>Created by <a href="http://www.polymer-project.org">The Polymer Authors</a></p>
 			<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
 		</footer>
+
 	</body>
 </html>

@@ -5,11 +5,10 @@
 <link rel="import" href="td-item.html">
 <link rel="import" href="td-model.html">
 
-<polymer-element name="td-todos" attributes="route">
+<polymer-element name="td-todos" attributes="route storage storageId">
 	<template>
 		<link rel="stylesheet" href="td-todos.css">
 		<flatiron-director route="{{route}}"></flatiron-director>
-		<polymer-localstorage id="storage" name="todos-polymer" value="{{items}}"></polymer-localstorage>
 		<td-model id="model" items="{{items}}" filter="{{route}}" on-td-model-changed="modelChangedAction"></td-model>
 		<section id="todoapp">
 			<header id="header">
@@ -47,6 +46,14 @@
 			var ENTER_KEY = 13;
 			var ESC_KEY = 27;
 			Polymer('td-todos', {
+        storage: null,
+        storageId: '',
+        storageChanged: function() {
+          this.items = this.storage && this.storage.value;
+        },
+        storageIdChanged: function() {
+          this.storage = document.querySelector('#' + this.storageId);
+        },
 				addTodoAction: function() {
 					this.$.model.newItem(this.$['new-todo'].value);
 					// when polyfilling Object.observe, make sure we update immediately
@@ -57,7 +64,9 @@
 					this.$['new-todo'].value = '';
 				},
 				modelChangedAction: function() {
-					this.$.storage.save();
+          if (this.storage) {
+            this.storage.save();
+          }
 				},
 				itemChangedAction: function() {
 					this.$.model.itemsChanged();
