@@ -38,6 +38,7 @@
 						if (this.item.title === '') {
 							this.destroyAction();
 						}
+            this.fire('td-item-changed');
 					}
 				},
 				cancelAction: function() {
