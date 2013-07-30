@@ -27,7 +27,12 @@ input::-webkit-input-placeholder {
 	font-style: italic;
 }
 
-input:-moz-placeholder {
+input::-moz-placeholder {
+	font-style: italic;
+	color: #a9a9a9;
+}
+
+input:-ms-input-placeholder, #new-todo:-ms-input-placeholder {
 	font-style: italic;
 	color: #a9a9a9;
 }
