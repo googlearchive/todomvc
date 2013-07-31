@@ -1,4 +1,4 @@
-<polymer-element name="td-model" attributes="filter items">
+<polymer-element name="td-model" attributes="filter items storageId">
 	<script>
 		Polymer('td-model', {
 			filtered: null,
@@ -19,7 +19,14 @@
 				this.activeCount = this.items.length - this.completedCount;
 				this.allCompleted = this.completedCount && !this.activeCount;
 				this.filterItems();
-				this.fire('td-model-changed');
+				if (this.storage) {
+					this.storage.value = this.items;
+					this.storage.save();
+				}
+			},
+			storageIdChanged: function() {
+				this.storage = document.querySelector('#' + this.storageId);
+				this.storage && (this.items = this.storage.value);
 			},
 			filterItems: function() {
 				var fn = this.filters[this.filter];
