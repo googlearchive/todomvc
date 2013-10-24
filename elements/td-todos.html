@@ -9,12 +9,12 @@
 		<flatiron-director route="{{route}}"></flatiron-director>
 		<section id="todoapp">
 			<header id="header">
-				<input is="td-input" id="new-todo" placeholder="What needs to be done?" autofocus on-td-input-commit="addTodoAction" on-td-input-cancel="cancelAddTodoAction">
+				<input is="td-input" id="new-todo" placeholder="What needs to be done?" autofocus on-td-input-commit="{{addTodoAction}}" on-td-input-cancel="{{cancelAddTodoAction}}">
 			</header>
 			<section id="main" hidden?="{{model.items.length == 0}}">
-				<input id="toggle-all" type="checkbox" on-change="toggleAllCompletedAction" checked="{{model.allCompleted}}">
+				<input id="toggle-all" type="checkbox" on-change="{{toggleAllCompletedAction}}" checked="{{model.allCompleted}}">
 				<label for="toggle-all">Mark all as complete</label>
-				<ul id="todo-list" on-td-item-changed="itemChangedAction" on-td-destroy-item="destroyItemAction">
+				<ul id="todo-list" on-td-item-changed="{{itemChangedAction}}" on-td-destroy-item="{{destroyItemAction}}">
 					<template repeat="{{model.filtered}}">
 						<li is="td-item" item="{{}}"></li>
 					</template>
@@ -33,7 +33,7 @@
 						<a href="../#/completed">Completed</a>
 					</li>
 				</polymer-selector>
-				<button hidden?="{{model.completedCount == 0}}" id="clear-completed" on-click="clearCompletedAction">Clear completed ({{model.completedCount}})</button>
+				<button hidden?="{{model.completedCount == 0}}" id="clear-completed" on-click="{{clearCompletedAction}}">Clear completed ({{model.completedCount}})</button>
 			</footer>
 		</section>
 	</template>
