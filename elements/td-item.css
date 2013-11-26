@@ -1,9 +1,7 @@
 /* base.css overrides */
-@host {
-	.editing {
-		border-bottom: none;
-		padding: 0;
-	}
+:host(.editing:host){
+	border-bottom: none;
+	padding: 0;
 }
 
 button {

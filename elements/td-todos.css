@@ -1,10 +1,8 @@
 /* base.css overrides */
 
-@host { 
-	* { 
-		display: block;
-		position: relative;
-	}
+:host { 
+	display: block;
+	position: relative;
 }
 
 button {
