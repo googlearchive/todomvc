@@ -1,6 +1,6 @@
 
 <link rel="import" href="../components/polymer/polymer.html">
-<link rel="import" href="../components/polymer-selector/polymer-selector.html">
+<link rel="import" href="../components/core-selector/core-selector.html">
 <link rel="import" href="../components/flatiron-director/flatiron-director.html">
 <link rel="import" href="td-input.html">
 <link rel="import" href="td-item.html">
@@ -24,7 +24,7 @@
 			</section>
 			<footer id="footer" hidden?="{{model.items.length == 0}}">
 				<span id="todo-count"><strong>{{model.activeCount}}</strong> {{model.activeCount == 1 ? 'item' : 'items'}} left</span>
-				<polymer-selector id="filters" selected="{{route || 'all'}}">
+				<core-selector id="filters" selected="{{route || 'all'}}">
 					<li name="all">
 						<a href="../#/">All</a>
 					</li>
@@ -34,7 +34,7 @@
 					<li name="completed">
 						<a href="../#/completed">Completed</a>
 					</li>
-				</polymer-selector>
+				</core-selector>
 				<button hidden?="{{model.completedCount == 0}}" id="clear-completed" on-click="{{clearCompletedAction}}">Clear completed ({{model.completedCount}})</button>
 			</footer>
 		</section>
@@ -49,7 +49,9 @@
 					this.model = document.querySelector('#' + this.modelId);
 				},
 				routeChanged: function() {
-					this.model && (this.model.filter = this.route);
+					if (this.model) {
+						this.model.filter = this.route;
+					}
 				},
 				addTodoAction: function() {
 					this.model.newItem(this.$['new-todo'].value);
@@ -61,7 +63,9 @@
 					this.$['new-todo'].value = '';
 				},
 				itemChangedAction: function() {
-					this.model && this.model.itemsChanged();
+					if (this.model) {
+						this.model.itemsChanged();
+					}
 				},
 				destroyItemAction: function(e, detail) {
 					this.model.destroyItem(detail);
