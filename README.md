@@ -1,44 +1,49 @@
-# Polymer TodoMVC Example
+# polymer-todomvc-gruntified 
+***
+Polymer To-Do application using grunt, bower and hapijs
 
-> Polymer is a new type of library for the web, built on top of Web Components, and designed to leverage the evolving web platform on modern browsers.
+> ## Project Structure :
+    .
+    ├── config
+    |   ├── config.example.json
+    |   ├── development.json
+    |   └── production.json
+    ├── app
+    |   ├── elements
+    |   |   └── ...
+    |   ├── css
+    |   |   └── ...
+    |   └── main.html
+    ├── dist
+    |   └── ...
+    ├── test
+    |   └── ...
+    ├── bower_components
+    |   └── ...
+    ├── node_modules
+    |   └── ...
+    ├── .gitignore
+    ├── .jshintrc
+    ├── Gruntfile.js
+    ├── package.json
+    ├── bower.json
+    └── README.md
 
-> _[Polymer - www.polymer-project.org](http://www.polymer-project.org/)_
+> ## Project Setup :
+> 
+> 1.   clone the [git project](https://github.com/ctsh/polymer-todomvc-gruntified.git/)
+> 2.   run **npm install** to install dependencies
+> 3.   install [grunt and grunt-cli](http://gruntjs.com/)
+> 4.   install [bower](http://bower.io/)
+> 5.   run **grunt install** to setup the project
+> 6.   run **cp config/config.example.json config/development.json** and set the dev env settings accordingly.
+> 7.   run **grunt dev** to start the server in development mode
+> 8.   run **grunt package** to create a zipped version of the distribution that will be production ready.
+>
+> The above steps will get you a Polymer-ToDo server running.
+> Goto [http://localhost:8000/](http://localhost:8000/) and you should see the app running. Change to appropriate port that you set in the development.json file.
 
-## Learning Polymer
+### TO-DO
 
-The [Polymer website](http://www.polymer-project.org) is a great resource for getting started.
-
-Here are some links you may find helpful:
-
-* [Getting Started](http://www.polymer-project.org/docs/start/everything.html)
-* [FAQ](http://www.polymer-project.org/resources/faq.html)
-* [Browser Compatibility](http://www.polymer-project.org/resources/compatibility.html)
-
-Get help from Polymer devs and users:
-
-* Find us on IRC on __#polymer__ at freenode.
-* Join the high-traffic [polymer-dev](https://groups.google.com/forum/?fromgroups=#!forum/polymer-dev) Google group or the announcement-only [polymer-announce](https://groups.google.com/forum/?fromgroups=#!forum/polymer-announce) Google group.
-
-## Implementation
-
-The Polymer implementation of TodoMVC has a few key differences with other implementations:
-
-* Since [Web Components](http://w3c.github.io/webcomponents/explainer/) allow you to create new types of DOM elements, the DOM tree is very different from other implementations.
-* The template, styling, and behavior are fully encapsulated in each custom element. Instead of having an overall stylesheet (`base.css` or `app.css`), each element that needs styling has its own stylesheet.
-* Non-visual elements such as the router and the model are also implemented as custom elements and appear in the DOM. Implementing them as custom elements instead of plain objects allows you to take advantage of Polymer data binding and event handling throughout the app.
-
-## Compatibility
-
-Polymer and its polyfills are intended to work in the latest version of [evergreen browsers](http://tomdale.net/2013/05/evergreen-browsers/). IE9 is not supported. Please refer to [Browser Compatibility](http://www.polymer-project.org/resources/compatibility.html) for more details.
-
-## Running this sample
-
-1. Install [node.js](nodejs.org) (required for `bower` client-side package management)
-1. Install bower: `npm install -g bower`
-
-1. From the `todomvc\` folder, run `bower update`
-1. Start a web server in the `todomvc\` folder.  Hint: if you have python installed, you can just run:
-
-     `python -m SimpleHTTPServer`
-
-1. Browse to the server root
+-   Minify all the bower dependencies in the best possible way
+-   Add a grunt module for testing

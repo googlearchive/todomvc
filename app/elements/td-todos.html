@@ -8,9 +8,9 @@
     subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-<link rel="import" href="../components/polymer/polymer.html">
-<link rel="import" href="../components/core-selector/core-selector.html">
-<link rel="import" href="../components/flatiron-director/flatiron-director.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-selector/core-selector.html">
+<link rel="import" href="../../bower_components/flatiron-director/flatiron-director.html">
 <link rel="import" href="td-input.html">
 <link rel="import" href="td-item.html">
 
@@ -35,13 +35,13 @@
 				<span id="todo-count"><strong>{{model.activeCount}}</strong> {{model.activeCount == 1 ? 'item' : 'items'}} left</span>
 				<core-selector id="filters" selected="{{route || 'all'}}">
 					<li name="all">
-						<a href="../#/">All</a>
+						<a href="../../#/all">All</a>
 					</li>
 					<li name="active">
-						<a href="../#/active">Active</a>
+						<a href="../../#/active">Active</a>
 					</li>
 					<li name="completed">
-						<a href="../#/completed">Completed</a>
+						<a href="../../#/completed">Completed</a>
 					</li>
 				</core-selector>
 				<button hidden?="{{model.completedCount == 0}}" id="clear-completed" on-click="{{clearCompletedAction}}">Clear completed ({{model.completedCount}})</button>

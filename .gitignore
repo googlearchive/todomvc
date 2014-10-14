@@ -1,1 +1,11 @@
-components
+*.log
+*~
+config/*
+!config/*/
+!config/index.js
+!config/config.example.json
+dist/*
+node_modules/*
+bower_components/*
+public/*
+index.html
