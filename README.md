@@ -41,7 +41,7 @@ Polymer To-Do application using grunt, bower and hapijs
 > 8.   run **grunt package** to create a zipped version of the distribution that will be production ready.
 >
 > The above steps will get you a Polymer-ToDo server running.
-> Goto http://localhost:8000/ and you should see the app running. Change to appropriate port that you set in the development.json file.
+> Goto [http://localhost:8000/](http://localhost:8000/) and you should see the app running. Change to appropriate port that you set in the development.json file.
 
 ### TO-DO
 
