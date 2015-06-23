@@ -2,6 +2,9 @@
   "name": "todomvc-polymer",
   "version": "0.0.1",
   "dependencies": {
-    "todomvc-common": "~0.1.4"
+    "todomvc-common": "~0.1.4",
+    "iron-localstorage": "PolymerElements/iron-localstorage#1.0.0",
+    "iron-selector": "PolymerElements/iron-selector#1.0.0",
+    "flatiron-director": "nippur72/flatiron-director#~1.0.0"
   }
 }
