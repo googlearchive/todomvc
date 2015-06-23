@@ -54,11 +54,11 @@
 			var ENTER_KEY = 13;
 			var ESC_KEY = 27;
 			Polymer({
-        is: 'td-todos',
-        properties: {
-          route:   { observer: 'routeChanged(route)' },
-          modelId: { observer: 'modelIdChanged(modelId)' },
-        },              
+            is: 'td-todos',
+            properties: {
+               route:   { observer: 'routeChanged' },
+               modelId: { observer: 'modelIdChanged' },
+            },              
 				modelIdChanged: function() {
 					this.model = document.querySelector('#' + this.modelId);
 				},

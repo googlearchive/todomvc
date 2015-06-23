@@ -15,15 +15,15 @@
 		Polymer({
          is: 'td-model',    
          properties: {
-            "filter":    { observer: 'filterChanged(filter)'       },
-            "items":     { observer: 'itemsChanged(items)'         },        
-            "storageId": { observer: 'storageIdChanged(storageId)' },
+            "filter":    { observer: 'filterChanged'    },
+            "items":     { observer: 'itemsChanged'     },        
+            "storageId": { observer: 'storageIdChanged' },
          },      
 			ready: function() {
-  			this.filtered = null;
-  			this.completedCount = 0;
-  			this.activeCount = 0;
-  			this.allCompleted = false;
+            this.filtered = null;
+            this.completedCount = 0;
+            this.activeCount = 0;
+            this.allCompleted = false;
 
 				this.async(function() {
 					this.items = this.storage.value || [];
