@@ -13,12 +13,12 @@
 <dom-module id="td-model">
 	<script>
 		Polymer({
-      is: 'td-model',    
-      properties: {
-        "filter":    { observer: 'filterChanged(filter)'       },
-        "items":     { observer: 'itemsChanged(items)'         },        
-        "storageId": { observer: 'storageIdChanged(storageId)' },
-      },      
+         is: 'td-model',    
+         properties: {
+            "filter":    { observer: 'filterChanged(filter)'       },
+            "items":     { observer: 'itemsChanged(items)'         },        
+            "storageId": { observer: 'storageIdChanged(storageId)' },
+         },      
 			ready: function() {
   			this.filtered = null;
   			this.completedCount = 0;

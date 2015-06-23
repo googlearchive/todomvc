@@ -24,10 +24,11 @@
 	<script>
 		(function() {
 			Polymer({
-        is: 'td-item', 				
-        created() {
-          this.editing = false;
-        },
+            is: 'td-item', 				
+            properties: {
+               item:    { type: String },
+               editing: { type: Boolean, value: false }
+            },
 				editAction: function() {
 					this.editing = true;
 					// schedule focus for the end of microtask, when the input will be visible
