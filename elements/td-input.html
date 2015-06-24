@@ -7,6 +7,35 @@
     Code distributed by Google as part of the polymer project is also
     subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
+
+<link rel="import" href="../components/polymer/polymer.html">
+
+<dom-module id="td-input" extends="input" on-keyup="{{keyupAction}}" on-keypress="{{keypressAction}}">
+	<script>
+		(function() {
+			var ENTER_KEY = 13;
+			var ESC_KEY = 27;
+         Polymer({
+            is: 'td-input',
+            extends: 'input',
+				keypressAction: function(e, detail, sender) {
+					// Listen for enter on keypress but esc on keyup, because
+					// IE doesn't fire keyup for enter.
+					if (e.keyCode === ENTER_KEY) {
+						this.fire('td-input-commit');
+					}
+				},
+				keyupAction: function(e, detail, sender) {
+					if (e.keyCode === ESC_KEY) {
+						this.fire('td-input-cancel');
+					}
+				}
+			});
+		})();
+	</script>
+</dom-module>
+
+<!-- 
 <link rel="import" href="../components/polymer/polymer.html">
 
 <polymer-element name="td-input" extends="input" on-keyup="{{keyupAction}}" on-keypress="{{keypressAction}}">
@@ -31,3 +60,4 @@
 		})();
 	</script>
 </polymer-element>
+-->
